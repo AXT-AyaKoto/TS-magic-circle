@@ -6,7 +6,7 @@ TypeScriptコードを簡単に実行できるサイトです。
 
 ## License
 
-copyright (c) 2026- Ayasaka-Koto (AyaExpTech).  
+copyright (c) 2026- Ayasaka-Koto.  
 Released under the [MIT License](LICENSE).
 
 ## 使い方
@@ -93,7 +93,7 @@ async (input: string): Promise<string> => {
 
 > [!TIP]
 > 以下はクエリパラメータを知っている人向けの情報です。知らない人は読み飛ばしてください。
-> 
+>
 > - `p`でコード、`q`で入力文字列を指定できます
 > - `title`を指定するとタブのタイトルに追加の文字列を指定できます
 > - 各パラメータの処理は`URLSearchParams`で処理しています
