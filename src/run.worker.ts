@@ -6,19 +6,21 @@ import tsrsWasmUrl from "@tsrs/wasm/tsrs.wasm?url";
 import { runGuest } from "./execute.ts";
 import type { RunRequest, WorkerMessage } from "./protocol.ts";
 
-const tsconfig = {
-    compilerOptions: {
-        strict: true,
-        target: "es2022",
-        module: "esnext",
-        moduleResolution: "bundler",
-        lib: ["es2022"],
-        rootDir: "src",
-        outDir: "out",
-        noEmitOnError: true,
-    },
-    files: ["src/main.ts"],
-};
+function tsconfig(strict: boolean) {
+    return {
+        compilerOptions: {
+            strict,
+            target: "es2022",
+            module: "esnext",
+            moduleResolution: "bundler",
+            lib: ["es2022"],
+            rootDir: "src",
+            outDir: "out",
+            noEmitOnError: true,
+        },
+        files: ["src/main.ts"],
+    };
+}
 
 let quickjs: QuickJSWASMModule | undefined;
 let tsrsModule: WasmModule | undefined;
@@ -52,7 +54,7 @@ async function handle(request: RunRequest): Promise<void> {
         const compiled = await tsc(["-p", "/tsconfig.json", "--pretty", "false"], {
             cwd: "/",
             files: {
-                "/tsconfig.json": JSON.stringify(tsconfig),
+                "/tsconfig.json": JSON.stringify(tsconfig(request.strict)),
                 "/src/main.ts": request.source,
             },
             diagnostics: "json",

@@ -5,7 +5,12 @@ import { defineConfig, lazyPlugins } from "vite-plus";
 export default defineConfig({
     worker: { format: "es" },
     optimizeDeps: {
-        exclude: ["@tsrs/wasm", "@jitl/quickjs-ng-wasmfile-release-sync", "quickjs-emscripten-core"],
+        exclude: [
+            "@tsrs/wasm",
+            "@jitl/quickjs-ng-wasmfile-release-sync",
+            "quickjs-emscripten-core",
+            "input-switch-polyfill",
+        ],
     },
     fmt: {},
     lint: {

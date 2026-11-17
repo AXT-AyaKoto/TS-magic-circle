@@ -193,6 +193,9 @@ importers:
       '@tsrs/wasm':
         specifier: 7.1.0-beta.tsrs2
         version: 7.1.0-beta.tsrs2
+      input-switch-polyfill:
+        specifier: 1.12.0
+        version: 1.12.0
       monaco-editor:
         specifier: 0.57.0
         version: 0.57.0
@@ -1592,6 +1595,9 @@ packages:
   he@1.2.0:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
     hasBin: true
+
+  input-switch-polyfill@1.12.0:
+    resolution: {integrity: sha512-4IF+lwC4jjInFPWWjHDcVJWvWiTHm1RnGa+P9uLhOleal69NPbUnrcPHJJhuexyUqOnyA0QenXhtZNuZX4gqWA==}
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -3013,6 +3019,8 @@ snapshots:
   gensync@1.0.0-beta.2: {}
 
   he@1.2.0: {}
+
+  input-switch-polyfill@1.12.0: {}
 
   js-tokens@4.0.0: {}
 

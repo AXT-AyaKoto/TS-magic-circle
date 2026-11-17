@@ -16,13 +16,13 @@ export function whenReady(): Promise<void> {
     return ensure().ready;
 }
 
-export async function execute(source: string, input: string): Promise<RunResult> {
+export async function execute(source: string, input: string, strict: boolean): Promise<RunResult> {
     const current = ensure();
     await current.ready;
     const id = ++nextId;
     const gate = Promise.withResolvers<RunResult>();
     pending.set(id, gate);
-    const request: RunRequest = { type: "run", id, source, input };
+    const request: RunRequest = { type: "run", id, source, input, strict };
     current.worker.postMessage(request);
     return gate.promise;
 }

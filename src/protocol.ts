@@ -3,6 +3,7 @@ export type RunRequest = {
     id: number;
     source: string;
     input: string;
+    strict: boolean;
 };
 
 export type WorkerMessage =

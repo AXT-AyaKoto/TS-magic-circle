@@ -65,7 +65,6 @@ const themeColors = {
     },
 };
 
-let typescriptConfigured = false;
 let themesDefined = false;
 
 export function createEditors(hosts: {
@@ -73,9 +72,10 @@ export function createEditors(hosts: {
     output: HTMLElement;
     code: HTMLElement;
     session: Session;
+    strict: boolean;
     onRun: () => void;
 }): Editors {
-    configureTypescript();
+    setTypescriptStrict(hosts.strict);
     defineThemes();
     const darkScheme = matchMedia("(prefers-color-scheme: dark)");
     const applyTheme = () => {
@@ -147,14 +147,13 @@ function defineThemes(): void {
     }
 }
 
-function configureTypescript(): void {
-    if (typescriptConfigured) return;
-    typescriptConfigured = true;
+export function setTypescriptStrict(strict: boolean): void {
     const defaults = typescript.typescriptDefaults;
     // 初期値の allowNonTsExtensions を残す。消すと inmemory モデルを診断できない。
+    // setCompilerOptions は診断をやり直すので、コード欄を作り直さなくてよい。
     defaults.setCompilerOptions({
         ...defaults.getCompilerOptions(),
-        strict: true,
+        strict,
         target: typescript.ScriptTarget.ESNext,
         module: typescript.ModuleKind.ESNext,
         lib: ["es2022"],

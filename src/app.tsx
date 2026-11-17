@@ -1,6 +1,6 @@
 import type { ComponentChildren } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
-import { createEditors, type Editors } from "./editors.ts";
+import { createEditors, setTypescriptStrict, type Editors } from "./editors.ts";
 import {
     IconAlert,
     IconBraces,
@@ -43,6 +43,9 @@ export function App() {
     const [status, setStatus] = useState<Status>({ kind: "loading" });
     const [busy, setBusy] = useState(false);
     const [canRun, setCanRun] = useState(false);
+    const [strict, setStrict] = useState(false);
+    const strictRef = useRef(strict);
+    strictRef.current = strict;
 
     useEffect(() => {
         alive.current = true;
@@ -71,6 +74,7 @@ export function App() {
             output,
             code,
             session,
+            strict: strictRef.current,
             onRun: () => {
                 runRef.current();
             },
@@ -89,7 +93,11 @@ export function App() {
         setBusy(true);
         setStatus({ kind: "running" });
         try {
-            const result = await execute(current.code.getValue(), current.input.getValue());
+            const result = await execute(
+                current.code.getValue(),
+                current.input.getValue(),
+                strictRef.current,
+            );
             if (!alive.current) return;
             current.output.setValue(result.output);
             setStatus({ kind: result.ok ? "done" : "failed" });
@@ -127,6 +135,14 @@ export function App() {
                     TS Magic Circle
                 </h1>
                 <div class="actions">
+                    <StrictSwitch
+                        checked={strict}
+                        onChange={(checked) => {
+                            strictRef.current = checked;
+                            setStrict(checked);
+                            setTypescriptStrict(checked);
+                        }}
+                    />
                     <CopyButton
                         label="共有リンクをコピー"
                         doneLabel="共有リンクをコピーしました"
@@ -231,6 +247,26 @@ function StatusBadge(props: { status: Status }) {
             <span class="status-text">{text}</span>
         </p>
     );
+}
+
+function StrictSwitch(props: { checked: boolean; onChange: (checked: boolean) => void }) {
+    return (
+        <label class="strict">
+            TS strict
+            <input
+                ref={markSwitch}
+                type="checkbox"
+                checked={props.checked}
+                onChange={(event) => {
+                    props.onChange(event.currentTarget.checked);
+                }}
+            />
+        </label>
+    );
+}
+
+function markSwitch(element: HTMLInputElement | null): void {
+    element?.setAttribute("switch", "");
 }
 
 function CopyButton(props: {
