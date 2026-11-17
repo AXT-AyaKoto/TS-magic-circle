@@ -1,15 +1,33 @@
-# TS Magic Circle
+# AXT-AyaKoto/TS-magic-circle
 
-入力の文字列と TypeScript の矢印関数をブラウザの中で JavaScript に変換し、QuickJS の中で実行するサイトです。  
-A site that transpiles a TypeScript arrow function in the browser and runs it inside QuickJS.
-
-ユーザーのコードはページの JavaScript としては実行しません。QuickJS-NG の wasm の中だけで評価します。  
-[JS magic circle](https://github.com/AyaExpTech/JS_magic-circle) の後継です。旧サイトとの互換は持っていません。
+TypeScriptコードを簡単に実行できるサイトです。
+文字列入出力ができるので文字列変換処理を適当にやりたいときに使ってください。
+ある程度安全なのでプログラム書ける人にコードだけ書かせるのもありだとおもいます。
 
 ## License
 
 copyright (c) 2026- Ayasaka-Koto (AyaExpTech).  
 Released under the [MIT License](LICENSE).
+
+## 使い方
+
+簡単にいうと……
+
+1. [``]()を開きます
+2. 「コード」欄に実行したいコードを書きます (コードの書き方は後述しますが、AIに書かせることもできます)
+3. 「入力」欄に処理したいテキストを書きます
+4. 「実行」ボタンを押します
+    - Macでは`command` + `Enter`、Windowsなどでは`Ctrl` + `Enter`で実行することもできます
+5. 「出力」欄に結果が出るので、煮るなり焼くなり好きにしてください
+
+### コードを準備する
+
+「コード」欄に書くコードは、TypeScript・JavaScriptの関数です。
+文字列を1つ引数として受け取り
+
+
+
+# TS Magic Circle
 
 ## コードの書き方
 
